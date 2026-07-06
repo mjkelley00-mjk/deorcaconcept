@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thanks! | Deora Concept</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg-top:#255c6d;--bg-mid:#173d4a;--bg-bot:#0e2a35;--orb:150,222,240}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:flex;flex-direction:column;
+    font-family:"Manrope",-apple-system,"Segoe UI",Arial,sans-serif;color:#f4fbfc;
+    background:radial-gradient(1200px 700px at 75% 18%,rgba(70,150,175,.38),transparent 60%),
+      linear-gradient(180deg,var(--bg-top) 0%,var(--bg-mid) 45%,var(--bg-bot) 100%);
+    background-attachment:fixed;-webkit-font-smoothing:antialiased}
+  .orbs{position:fixed;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+  .orb{position:absolute;bottom:-170px;border-radius:50%;
+    background:radial-gradient(circle at 38% 34%,rgba(255,255,255,.95) 0%,rgba(var(--orb),.9) 22%,rgba(var(--orb),.5) 52%,rgba(var(--orb),.14) 78%,rgba(var(--orb),0) 100%);
+    box-shadow:0 0 10px rgba(var(--orb),.35);filter:blur(.3px);animation:drift linear infinite;opacity:0}
+  .orb.soft{filter:blur(3px)}.orb.tiny{filter:none}
+  @keyframes drift{0%{transform:translate(0,0) scale(.85);opacity:0}12%{opacity:.95}50%{transform:translate(32px,-52vh) scale(1)}88%{opacity:.7}100%{transform:translate(-24px,-114vh) scale(1.06);opacity:0}}
+  header{position:relative;z-index:1;border-bottom:2px solid rgba(255,255,255,.92);background:rgba(37,92,109,.62)}
+  .bar{max-width:1180px;margin:0 auto;padding:14px 26px}
+  .bar img{height:46px;width:auto;display:block}
+  main{position:relative;z-index:1;flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px 24px}
+  .card{max-width:620px}
+  .check{width:92px;height:92px;margin:0 auto 26px;border-radius:50%;border:4px solid #f4fbfc;display:flex;align-items:center;justify-content:center}
+  .check svg{width:48px;height:48px;fill:none;stroke:#f4fbfc;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}
+  h1{font-weight:800;font-size:2.8rem;margin:0 0 14px}
+  p{font-weight:300;font-size:1.25rem;color:#eaf6f8;margin:0 auto 30px;max-width:520px}
+  a.btn{display:inline-block;background:#3aa5c4;color:#fff;font-weight:700;font-size:1.05rem;
+    padding:14px 34px;border-radius:2px;letter-spacing:.5px;transition:.2s;text-decoration:none}
+  a.btn:hover{background:#2f8caa}
+  footer{position:relative;z-index:1;background:var(--bg-bot);text-align:center;padding:26px 20px}
+  footer small{color:#9fc4cd;font-size:.9rem;font-weight:300}
+</style>
+</head>
+<body>
+<div class="orbs" id="orbs" aria-hidden="true"></div>
+
+<header><div class="bar"><a href="index.html"><img src="assets/logo.png" alt="Deora Concept"></a></div></header>
+
+<main>
+  <div class="card">
+    <div class="check" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M22 52 L44 74 L80 30"/></svg></div>
+    <h1>Thanks for submitting!</h1>
+    <p>We've received your request and will be in touch shortly. In the meantime, feel free to call us at 312.324.7304.</p>
+    <a class="btn" href="index.html">Back to Home</a>
+  </div>
+</main>
+
+<footer><small>Copyright 2020 &nbsp;*&nbsp; Deora Concept LLC &nbsp;*&nbsp; 1653 S Blue Island Ave &nbsp;*&nbsp; All Rights Reserved</small></footer>
+
+<script>
+  (function(){
+    var layer=document.getElementById('orbs');
+    function make(cls,count,min,max){for(var i=0;i<count;i++){var o=document.createElement('span');o.className='orb '+cls;var size=min+Math.random()*(max-min);var dur=16+Math.random()*20;o.style.width=o.style.height=size+'px';o.style.left=Math.random()*100+'vw';o.style.animationDuration=dur+'s';o.style.animationDelay=(-Math.random()*dur)+'s';layer.appendChild(o);}}
+    make('soft',10,70,150);make('',20,22,64);make('tiny',24,5,14);
+  })();
+</script>
+</body>
+</html>

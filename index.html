@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coworking Space | Deora Concept | United States</title>
+<meta name="description" content="Deora Concept is a shared work space for individuals and businesses.">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Manrope: modern geometric sans in the spirit of the site's original Avenir -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-top:#255c6d;
+    --bg-mid:#173d4a;
+    --bg-bot:#0e2a35;
+    --panel:rgba(12,34,42,.55);
+    --white:#f4fbfc;
+    --teal-band:#2c7d93;
+    --orb:150,222,240;
+    --c1:#8fc3dc;
+    --c2:#2f7f97;
+    --c3:#c7e4ef;
+    --c4:#3d90b2;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:"Manrope",-apple-system,"Segoe UI",Arial,sans-serif;
+    font-weight:400;
+    color:var(--white);
+    background:
+      radial-gradient(1200px 700px at 75% 18%, rgba(70,150,175,.38), transparent 60%),
+      linear-gradient(180deg,var(--bg-top) 0%,var(--bg-mid) 45%,var(--bg-bot) 100%);
+    background-attachment:fixed;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4,h5{font-family:"Manrope",sans-serif;font-weight:800;line-height:1.12;margin:0 0 .5em}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 26px}
+  section{position:relative;z-index:1}
+
+  /* ---------- GLOWING BUBBLES (sharper) ---------- */
+  .orbs{position:fixed;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+  .orb{
+    position:absolute;bottom:-170px;border-radius:50%;
+    background:radial-gradient(circle at 38% 34%,
+        rgba(255,255,255,.95) 0%,
+        rgba(var(--orb),.9) 22%,
+        rgba(var(--orb),.5) 52%,
+        rgba(var(--orb),.14) 78%,
+        rgba(var(--orb),0) 100%);
+    box-shadow:0 0 10px rgba(var(--orb),.35);
+    filter:blur(.3px);
+    animation:drift linear infinite;
+    opacity:0;
+  }
+  .orb.soft{filter:blur(3px);opacity:0}       /* larger, slightly soft depth layer */
+  .orb.tiny{filter:none}                        /* crisp little bubbles */
+  @keyframes drift{
+    0%{transform:translate(0,0) scale(.85);opacity:0}
+    12%{opacity:.95}
+    50%{transform:translate(32px,-52vh) scale(1);}
+    88%{opacity:.7}
+    100%{transform:translate(-24px,-114vh) scale(1.06);opacity:0}
+  }
+
+  /* ---------- HEADER ---------- */
+  header{position:sticky;top:0;z-index:20;background:rgba(37,92,109,.62);backdrop-filter:blur(8px);border-bottom:2px solid rgba(255,255,255,.92)}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0}
+  .logo img{height:46px;width:auto}
+  nav a{margin-left:24px;font-weight:700;font-size:.95rem;color:#e7f4f7}
+  nav a:hover{color:#fff}
+  @media(max-width:760px){nav{display:none}}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:54px 0 70px}
+  .hero-grid{display:grid;grid-template-columns:minmax(320px,520px) 1fr;gap:54px;align-items:start}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:34px}}
+
+  .booking{background:var(--panel);backdrop-filter:blur(4px);padding:34px 32px 40px}
+  .booking h5{font-size:1.7rem;font-weight:800;margin-bottom:22px;line-height:1.15}
+  .booking form{display:grid;gap:16px}
+  .booking input,.booking textarea{width:100%;padding:14px 15px;border:0;font:inherit;background:#fbfeff;color:#12303b}
+  .booking textarea{min-height:150px;resize:vertical}
+  .booking input::placeholder,.booking textarea::placeholder{color:#5b6f77}
+  .booking button{background:#3aa5c4;color:#fff;border:0;padding:13px 20px;font-family:"Manrope";font-weight:700;font-size:1.05rem;cursor:pointer;transition:.2s;letter-spacing:.5px}
+  .booking button:hover{background:#2f8caa}
+
+  .hero-copy h1{font-size:4.1rem;font-weight:800;letter-spacing:.5px;margin-bottom:26px}
+  .hero-copy p{font-size:1.3rem;font-weight:300;max-width:640px;color:#eaf6f8}
+  @media(max-width:900px){.hero-copy h1{font-size:2.7rem}}
+
+  /* ---------- PRICING (4 flat columns w/ icons) ---------- */
+  .pricing{display:grid;grid-template-columns:repeat(4,1fr)}
+  @media(max-width:860px){.pricing{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.pricing{grid-template-columns:1fr}}
+  .col{padding:48px 30px;text-align:center;min-height:440px}
+  .col .icon{width:74px;height:74px;margin:0 auto 20px;display:block}
+  .col .icon svg{width:100%;height:100%;fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+  .col h3{font-size:1.1rem;letter-spacing:2px;text-transform:uppercase;font-weight:800;margin-bottom:14px}
+  .col .sub{font-weight:700;margin-bottom:12px;line-height:1.4}
+  .col .price{font-weight:800;font-size:1.5rem;margin:14px 0}
+  .col p{margin:.28em 0;font-weight:300}
+  .col1{background:var(--c1);color:#fff}
+  .col2{background:var(--c2);color:#fff}
+  .col3{background:var(--c3);color:#fff}
+  .col4{background:var(--c4);color:#fff}
+
+  /* ---------- BANDS + GALLERIES ---------- */
+  .band{padding:64px 0 30px}
+  .band h2{font-weight:800;font-size:2.1rem}
+  .band h2 span{font-style:italic;font-weight:300;font-size:1.4rem}
+  .strip{display:grid;grid-template-columns:repeat(4,1fr)}
+  @media(max-width:860px){.strip{grid-template-columns:repeat(2,1fr)}}
+  .strip figure{margin:0;position:relative;overflow:hidden;aspect-ratio:3/2.05;background:#0e2a35}
+  .strip img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+  .strip figure:hover img{transform:scale(1.08)}
+  .map{height:320px;width:100%;border:0;display:block}
+
+  /* ---------- CTA + FOOTER ---------- */
+  .cta{background:var(--teal-band);text-align:center;padding:40px 20px}
+  .cta a{font-weight:800;font-size:1.9rem;color:#fff}
+  footer{background:var(--bg-bot);text-align:center;padding:40px 20px 54px}
+  footer .phone{font-weight:800;font-size:1.5rem;color:#fff;margin-bottom:18px}
+  footer small{color:#9fc4cd;font-size:.9rem;font-weight:300}
+</style>
+</head>
+<body>
+
+<div class="orbs" id="orbs" aria-hidden="true"></div>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#top"><img src="assets/logo.png" alt="Deora Concept"></a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#spaces">Spaces</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#location">Location</a>
+      <a href="#book">Book a Tour</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="booking" id="book">
+        <h5>Schedule a Tour or book a Workspace Today!</h5>
+        <form action="https://formspree.io/f/mpqgnwde" method="POST">
+          <input type="text" name="name" placeholder="Name" required>
+          <input type="email" name="email" placeholder="Email" required>
+          <input type="tel" name="phone" placeholder="Phone">
+          <textarea name="message" placeholder="Comments"></textarea>
+          <input type="hidden" name="_subject" value="New tour request from deoraconcept.com">
+          <input type="hidden" name="_next" value="thankyou.html">
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <div class="hero-copy">
+        <h1>SHARED OFFICE SPACE THAT WORKS FOR YOU</h1>
+        <p>Opened in 2012, Deora Concept is a shared working environment designed for individuals and organizations looking for a turnkey office solution that offers flexibility and value without compromise.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="band" id="about">
+    <div class="wrap">
+      <h2>About</h2>
+      <p style="max-width:900px;font-size:1.15rem;font-weight:300;color:#eaf6f8">The idea is simple: a cool, functional workspace solution for people who need a place to set up shop or for established companies looking to grow. <em>Deora</em> is Irish-Gaelic for "drops" — important on their own, but stronger together. Our concept is to create an environment where like-minded individuals and organizations can work in a space that offers all of the amenities and conveniences of a larger office at a fraction of the cost, while also creating a community that offers the opportunity for collaboration with others.</p>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="spaces">
+    <div class="pricing">
+      <div class="col col1">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M17 33 L33 17 L44 28 L28 44 Z"/><path d="M33 35 L70 72"/><path d="M30 72 L54 48"/><path d="M72 24 A12 12 0 1 0 58 46"/><path d="M72 24 L64 32"/></svg></span>
+        <h3>Business Tools</h3>
+        <div class="sub">Included with all membership levels:</div>
+        <p>Business-class WiFi</p>
+        <p>Legal GPS Access</p>
+        <p>Fax, Copy, Scan, Print</p>
+        <p>Private Phone Room</p>
+        <p>Kitchenette and Lounge</p>
+        <p>Waiting Area</p>
+        <p>Coffee and Water</p>
+      </div>
+      <div class="col col2">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M16 60 L84 60"/><path d="M22 60 L22 82"/><path d="M60 60 L60 82 L82 82 L82 60"/><path d="M60 71 L82 71"/><path d="M67 65.5 L75 65.5"/><path d="M67 76.5 L75 76.5"/><rect x="28" y="34" width="24" height="18" rx="1.5"/><path d="M40 52 L40 58"/><path d="M33 58 L47 58"/><path d="M55 50 L55 58 L65 58 L65 50 Z"/><path d="M65 51.5 a3.6 3.6 0 0 1 0 5"/></svg></span>
+        <h3>Workspaces &amp; Private Offices</h3>
+        <div class="sub">Daily, Weekly, or Monthly Membership</div>
+        <div class="price">$25&ndash;$250</div>
+        <p>Desk</p>
+        <p>Chair</p>
+        <p>Waste Basket</p>
+        <p>Power Strip</p>
+      </div>
+      <div class="col col3">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M26 60 L26 68 L74 68 L74 60 Z"/><circle cx="50" cy="28" r="7"/><path d="M39 48 a11 11 0 0 1 22 0"/><circle cx="26" cy="35" r="6"/><path d="M17 53 a9 9 0 0 1 18 0"/><circle cx="74" cy="35" r="6"/><path d="M65 53 a9 9 0 0 1 18 0"/></svg></span>
+        <h3>Conference Room</h3>
+        <div class="sub">Hourly rates available<br>Daily, Weekly, or Monthly Membership</div>
+        <div class="price">$50&ndash;$500</div>
+        <p>Seating for 10</p>
+        <p>TV w/ Chromecast</p>
+        <p>White Board Walls</p>
+      </div>
+      <div class="col col4">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 100 100"><rect x="40" y="34" width="40" height="30" rx="2"/><path d="M40 36 L60 51 L80 36"/><path d="M12 42 L32 42"/><path d="M8 51 L32 51"/><path d="M16 60 L32 60"/></svg></span>
+        <h3>Mailbox Services</h3>
+        <div class="price">$50&ndash;$75</div>
+        <p>Mail-only Memberships</p>
+        <p>Pick-up or Forwarding available</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="wrap band" style="padding-bottom:24px">
+      <h2>Take a look: <span>we have the space, amenities, and flexibility you've been looking for. Perfect for individuals, teams, meetings &mdash; whatever you need.</span></h2>
+    </div>
+    <div class="strip">
+      <figure><img loading="lazy" src="assets/work1.jpg" alt="Workspaces"></figure>
+      <figure><img loading="lazy" src="assets/conference1.jpg" alt="Conference Room"></figure>
+      <figure><img loading="lazy" src="assets/work2.jpg" alt="Workspaces"></figure>
+      <figure><img loading="lazy" src="assets/kitchenette.jpg" alt="Kitchenette"></figure>
+      <figure><img loading="lazy" src="assets/work3.jpg" alt="Workspaces"></figure>
+      <figure><img loading="lazy" src="assets/conference2.jpg" alt="Private Offices"></figure>
+      <figure><img loading="lazy" src="assets/lounge2.jpg" alt="Lounge"></figure>
+      <figure><img loading="lazy" src="assets/lounge1.jpg" alt="Waiting Area"></figure>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section id="location">
+    <div class="wrap band" style="padding-bottom:24px">
+      <h2>Located in Pilsen: <span>easily accessed by train, bus, or car and surrounded by a wonderful, unique, and vibrant neighborhood. A quintessential Chicago location.</span></h2>
+    </div>
+    <iframe class="map" loading="lazy" title="Map to Deora Concept"
+      src="https://www.google.com/maps?q=1653+S+Blue+Island+Ave,+Chicago,+IL&output=embed"></iframe>
+    <div class="strip">
+      <figure><img loading="lazy" src="assets/building.jpg" alt="Our Building"></figure>
+      <figure><img loading="lazy" src="assets/mural.jpg" alt="Mural"></figure>
+      <figure><img loading="lazy" src="assets/street18th.jpg" alt="18th Street"></figure>
+      <figure><img loading="lazy" src="assets/intersection.jpg" alt="18th St and Blue Island Ave"></figure>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta"><a href="#book">Check us out: schedule a tour!</a></section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="phone">Fill out the form above or call us at 312.324.7304!</div>
+    <small>Copyright 2026 &nbsp;*&nbsp; Deora Concept LLC &nbsp;*&nbsp; 1653 S Blue Island Ave &nbsp;*&nbsp; All Rights Reserved</small>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var layer=document.getElementById('orbs');
+    function make(cls,count,min,max){
+      for(var i=0;i<count;i++){
+        var o=document.createElement('span');
+        o.className='orb '+cls;
+        var size=min+Math.random()*(max-min);
+        var dur=16+Math.random()*20;
+        o.style.width=o.style.height=size+'px';
+        o.style.left=Math.random()*100+'vw';
+        o.style.animationDuration=dur+'s';
+        o.style.animationDelay=(-Math.random()*dur)+'s';
+        layer.appendChild(o);
+      }
+    }
+    make('soft',10,70,150);   // depth layer
+    make('',20,22,64);        // main bubbles
+    make('tiny',24,5,14);     // crisp sparks
+  })();
+</script>
+</body>
+</html>
