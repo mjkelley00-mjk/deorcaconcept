@@ -162,6 +162,7 @@
           <!-- anti-spam honeypot: hidden from people; bots fill it in and get dropped -->
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden">
           <input type="hidden" name="_elapsed" value="">
+          <input type="hidden" name="_token" value="deora-tour-2026">
           <button type="submit">Submit</button>
           <div id="formError" style="display:none;margin-top:10px;color:#ffd7d7;font-weight:600"></div>
         </form>
@@ -306,18 +307,17 @@
         return;
       }
       if(btn){btn.disabled=true;btn.textContent='Sending…';}
-      // Apps Script web apps don't return CORS headers, so we send no-cors (fire-and-forget)
-      // and redirect on success. Fields arrive server-side as e.parameter.
-      fetch(form.action,{
-        method:'POST',
-        mode:'no-cors',
-        body:new URLSearchParams(new FormData(form))
-      }).then(function(){
-        window.location.href='thankyou.html';
-      }).catch(function(){
-        if(btn){btn.disabled=false;btn.textContent='Submit';}
-        if(err){err.textContent='Sorry, something went wrong. Please call 312.324.7304.';err.style.display='block';}
-      });
+      var data=new URLSearchParams(new FormData(form));
+      var done=false;
+      function go(){ if(done)return; done=true; window.location.href='thankyou.html'; }
+      // Apps Script returns an opaque cross-origin response we can't read, so don't wait on it.
+      // sendBeacon reliably delivers the POST even as we navigate away; redirect immediately.
+      var beaconOk=false;
+      try{ beaconOk = navigator.sendBeacon(form.action, data); }catch(_){}
+      if(beaconOk){ go(); return; }
+      // Fallback: fire-and-forget fetch, then redirect regardless after a short delay.
+      try{ fetch(form.action,{method:'POST',mode:'no-cors',body:data}).then(go).catch(go); }catch(_){}
+      setTimeout(go, 2500);
     });
   })();
 </script>
